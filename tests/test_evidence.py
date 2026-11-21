@@ -135,3 +135,24 @@ class TestREIBMEvidence(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+from dataclasses import dataclass
+from typing import Tuple
+
+
+@dataclass(frozen=True)
+class LinguisticFeature:
+    feature_type: str
+    observed_text: str
+    normalized_text: str
+    source_id: str
+    context: str
+    status: str = "EXPLICIT"
+
+
+@dataclass(frozen=True)
+class LinguisticAnalysis:
+    source_id: str
+    features: Tuple[LinguisticFeature, ...]
+    candidate_anomalies: Tuple[str, ...]
+    decoding_status: str = "NOT_ESTABLISHED"
